@@ -1,0 +1,498 @@
+/* Start Variables */
+:root {
+    --main-color: #10cab7;
+    --secondary-color: #2c4755;
+    --section-padding: 60px;
+    --section-background: #f6f6f6;
+    --tertiary-color: #ebeced; 
+    --main-duration: 0.5s; /*if we want change it will be for all so very... & don't forget fallback */
+}
+/* End Variables */
+/* Start Global Rules  */
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+body {
+    font-family: 'Work Sans', sans-serif;
+}
+
+.container {
+    padding-left: 15px;
+    padding-right: 15px;
+    /* the above two lines is if the screen is very small the words will begin from left:0 */
+    margin-right: auto;
+    margin-left: auto;
+    /* we don't use margin:auto; b/c we only want the inline only */
+    /* width: 600px; */
+    /* for the above the line if we don't use the media queries when the screen is smaller than 600px you need to scroll  */
+    /* the media queries begin from 768px so any width under it will take full width b/c it is block element */
+    /* background-color: #aaa; */
+    /* this color was to show the container concept */
+}
+
+/* Small */
+@media (min-width: 768px) {
+    .container {
+        width: 750px;
+    }
+}
+
+/* Medium  */
+@media (min-width: 992px) {
+    .container {
+        width: 970px;
+    }
+}
+
+/* Large  */
+@media (min-width: 1200px) {
+    .container {
+        width: 1170px;
+    }
+}
+
+/* End Global Rules  */
+/* Start Components  */ /*These are used repeatedly*/
+.special-heading {
+    color: var(--tertiary-color);
+    font-size: 100px;
+    text-align: center;
+    font-weight: 800;
+    letter-spacing: -3px;
+    margin: 0;
+}
+
+.special-heading + p {
+    margin: -30px 0 0;
+    font-size: 20px;
+    text-align: center;
+    color: #797979;
+}
+
+@media (max-width: 767px) {
+    .special-heading {
+        font-size: 60px;
+    }
+    .special-heading + p {
+        margin-top: -20px;
+    }
+}
+/* End Components  */
+/* <!-- Header and links part_1 --> */
+/* Start Header  */
+.header {
+    padding: 20px;
+}
+
+.header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/*in the next line we didn't mention the container in the selector */
+.header .logo {
+    width: 60px;
+}
+
+.header .links {
+    position: relative;
+}
+
+.header .links:hover .icon span:nth-child(2) {
+    width: 100%;
+}
+
+.header .links .icon {
+    width: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+}
+
+.header .links .icon span {
+    background-color: black;
+    margin-bottom: 5px;
+    height: 2px;
+}
+
+.header .links .icon span:first-child {
+    width: 100%;
+}
+
+.header .links .icon span:nth-child(2) {
+    width: 60%;
+    transition: var(--main-duration);
+    /*i made these in the hover w'h is wrong*/
+}
+
+.header .links .icon span:last-child {
+    width: 100%;
+}
+
+/* <!-- Header and links part_2 --> */
+.header .links ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    background-color: var(--section-background);
+    position: absolute;
+    right: 0;
+    top: calc(100% + 15px);
+    min-width: 200px;
+    display: none;
+    z-index: 1; /*b/c the landing covered it */
+}
+
+.header .links ul::before {
+    content: "";
+    border-width: 10px;
+    border-style: solid;
+    border-color: transparent transparent #f6f6f6 transparent;
+    position: absolute;
+    right: 5px;
+    /*this line to center the arrow b/c the icon is 30px and the arrow is 20px*/
+    top: -20px;
+}
+
+.header .links:hover ul {
+    display: block;
+    /*I thought we use display:visible; w'h there is no & basically these is done by JS*/
+}
+
+.header .links ul li a {
+    display: block;
+    padding: 15px;
+    text-decoration: none;
+    color: #333;
+    transition: var(--main-duration);
+}
+
+.header .links ul li a:hover {
+    padding-left: 25px; /*! important note*/
+}
+
+.header .links ul li:not(:last-child) a {
+    border-bottom: 1px solid #ddd;
+}
+
+/* End Header  */
+/* Start Landing Section  */
+.landing {
+    background-image: url(../images/landing.jpg);
+    background-size: cover;
+    height: calc(100vh - 64px); /*! important note*/
+    /*64px is the height of the header we did these to avoid the scroll to down to see the whole background image but small height was left w'h was b/c of the default h1 margin */
+    position: relative;
+}
+
+.landing .intro-text {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    text-align: center;
+    width: 320px; /* we gave this line when we saw the mobile size (375),the text was technaneke + if we don't write these line the 'p' beytmeded based on the width but the template as we see ma beytmed so give it width */
+    max-width: 100%; /*for it not to go out of the screen or its parent*/
+}
+
+.landing .intro-text h1 {
+    margin: 0; /* to continue the calc(100vh - 64px) we avoided scroll*/ /*! important note*/
+    font-weight: bold;
+    font-size: 50px;
+    color: var(--main-color);
+}
+.landing .intro-text p {
+    font-size: 19px;
+    line-height: 1.8;
+}
+/* End Landing Section  */
+/* Start Features */
+.features {
+    padding-top: var(--section-padding);
+    padding-bottom: var(--section-padding);
+    background-color: var(--section-background);
+}
+
+.features .container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px,1fr));
+    gap: 20px;
+}
+
+.features .feat {
+    padding: 20px;
+    text-align: center;
+}
+
+.features .feat i {
+    color: var(--main-color);
+}
+
+.features .feat h3 {
+    font-weight: 800; /*from photoshop we saw that it extrabold and based on google fonts extrabold for these font is 800*/
+    margin: 30px 0;
+}
+
+.features .feat p {
+        line-height: 1.8; /*try to make the whole line-height similar*/
+        color: #777;
+        font-size: 17px;
+}
+/* End Features */
+/* Start Services */
+.services {
+    padding-top: var(--section-padding);
+    padding-bottom: var(--section-padding);
+    /* we left the background-color white to differentiat it from the above */
+}
+/* services part 2 below */
+.services .services-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px,1fr));
+    gap: 30px;
+    margin-top: 30px;
+}
+.services .services-content .srv {
+    display: flex;
+    margin-bottom: 40px;
+}
+@media (max-width:768px) {
+    .services .services-content .srv  {
+        flex-direction: column; /*! important note*/
+        text-align: center;
+    }
+}
+.services .services-content .srv i {
+    color: var(--main-color);
+    flex-basis: 60px; /*! important note*/
+}
+.services .services-content .srv .text {
+    flex: 1; /*We gave it to take the rest space and let the 'i' take her 60px*/ /*! important note*/
+}
+.services .services-content .srv .text h3 {
+    margin: 0 0 20px; /*we gave 0 margin to make h3 align hortizontally with the icon*/
+}
+.services .services-content .srv .text p {
+    color: #444;
+    font-weight: 300;
+    line-height: 1.6;
+    /* don't bother to the color the 'UI' will give you everything necessary :font , color , image.... */
+}
+.services .services-content .image {
+    text-align: center;
+    position: relative;
+}
+.services .services-content .image::before {
+    content: "";
+    background-color: var(--secondary-color);
+    width: 100px;
+    height: calc(100% + 100px); /*! important note*/
+    position: absolute;
+    top: -50px;
+    right: 0;
+    z-index: -1;
+}
+.services .services-content .image img {
+    width: 260px;
+}
+@media (max-width: 1199px) {
+    .image-column {
+        display: none;
+    }
+}
+/* it is not necessary to lengthen the nesting if it doesn't oppose with others */
+/* End Services */
+/* Start Portfolio */
+.portfolio {
+    padding-top: var(--section-padding);
+    padding-bottom: var(--section-padding);
+    background-color: var(--section-background);
+}
+.portfolio .portfolio-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px,1fr));
+    gap: 30px;
+    margin-top: 80px;
+}
+.portfolio .portfolio-content .card{
+    background-color: white;
+}
+.portfolio .portfolio-content .card img {
+    width: 100%; /*! important note*/
+    /* these line is astonising but instead of cssing an image it is better to bring all images with their
+    size made right */
+}
+.portfolio .portfolio-content .info {
+    padding: 20px;
+}
+.portfolio .portfolio-content .info h3 {
+    margin: 0;
+    /* these line is to make the above padding the only one to use to change the spaces*/
+}
+.portfolio .portfolio-content .info p {
+    color: #777;
+    line-height: 1.6;
+    margin-bottom: 0; 
+    /* if we don't do the above the line there will be space below info more than above */
+}
+/* the next media was a suggestion from osama */
+@media (max-width:767px) {
+    .portfolio .portfolio-content .card {
+        text-align: center;
+    }
+}
+/* End Portfolio */
+/* Start About */
+.about {
+    padding-top: var(--section-padding);
+    padding-bottom: calc(var(--section-padding) + 60px);
+    /* extra space for when img avaialble */
+}
+.about .about-content {
+    margin-top: 100px;
+    /* make the above var */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+@media (max-width:991px) {
+    .about .about-content {
+        flex-direction: column;
+        text-align: center;
+    }
+    /* or you can make the image disappear */
+    /* writing media is after the element normal css  ,i thinnk*/
+}
+.about .about-content .image {
+    position: relative;
+    width: 250px;
+    height: 375px;
+    /* we wrote the above two lines to specify the size of the image */
+}
+@media (max-width: 991px) {
+.about .about-content .image {
+    margin: 0 auto 60px;
+}
+}
+
+.about .about-content .image::before {
+    content:"";
+    position: absolute;
+    background-color:var(--tertiary-color);
+    width: 100px;
+    height: calc(100% + 80px);
+    top: -40px;
+    left: -20px;
+    z-index: -1;
+}
+.about .about-content .image::after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    top: -40px;
+    right: -150px;
+    width: 120px;
+    height: 300px;
+    border-left: 60px solid var(--main-color); 
+    border-bottom: 60px solid var(--main-color);
+    /* there is no one single method to make the "L" Shape */ /*! important note*/
+}
+@media (max-width: 991px) {
+    .about .about-content .image::before,
+    .about .about-content .image::after {
+        display: none;
+    }
+}
+.about .about-content .image img{
+    max-width: 100%;
+}
+/* About section part 2 */
+.about .about-content .text {
+    /* we want to make it to the left of the image so there is no one way you can do it by "flex:1;padding-left:30px; */
+    flex-basis: calc(100% - 500px); /*We have left 500px to the img*/ /*! important note*/
+}
+.about .about-content .text p:first-of-type {
+    font-weight: bold;
+    line-height: 2;
+    margin-bottom: 50px;
+}
+.about .about-content .text hr {
+    width: 50%; 
+    display: inline-block; /*by these we made it at the left */ /*! important note*/
+    border-color: var(--main-color); /*these how we edit the color of hr*/
+}
+.about .about-content .text p:last-of-type {
+    line-height: 2;
+    color: #777;
+    /* do var to be pro */
+}
+/* End About */
+/* Start Contact */
+.contact {
+    padding-top: var(--section-padding);
+    padding-bottom: var(--section-padding);
+    background-color: var(--section-background);
+}
+.contact .info {
+    padding-top: var(--section-padding);
+    padding-bottom: var(--section-padding);
+    text-align: center;
+}
+.contact .info .label {
+    font-size: 35px;
+    font-weight: 800;
+    color: var(--secondary-color);
+    letter-spacing: -2px;
+    margin-bottom: 15px;
+}
+.contact .info .link {
+    display: block;
+    font-size: 35px;
+    font-weight: 800;
+    color: var(--main-color);
+    text-decoration: none;
+}
+.contact .info .social {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    font-size: 16px;
+}
+.contact .info .social i {
+    margin-left: 10px;
+    color: var(--secondary-color);
+}
+@media (max-width: 767px) {
+    .contact .info .label,
+    .contact .info .link {
+        font-size: 25px;
+    }
+}
+/* End Contact */
+/* Start Footer  */
+.footer {
+    background-color: var(--secondary-color);
+    color: white;
+    padding: 30px 10px;
+    text-align: center;
+    font-size: 18px;
+}
+.footer span {
+    font-weight: bold;
+    color: var(--main-color);
+}
+/* End Footer  */
+
+/* Improve */
+.grid-3 {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px,1fr));
+}
+/*? By the way u can go to the folder u made the project it and clone there to make the repo  */
